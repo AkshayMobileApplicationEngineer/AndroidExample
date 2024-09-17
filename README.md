@@ -2,27 +2,8 @@
     <h1>Project List</h1>
 </center>
 
-<style>
-  table {
-    border-collapse: collapse;
-    width: 400px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  table, th, td {
-    border: 1px solid black;
-  }
-  th, td {
-    text-align: center;
-    padding: 8px;
-  }
-  th {
-    background-color: pink;
-  }
-  a {
-    text-decoration: none;
-  }
-</style>
+
+
 
 <table>
   <thead>
@@ -47,6 +28,21 @@
       <td>3</td>
       <td>Rest ApiCalling</td>
       <td><a href="./RestApiCalling/RestApiCalling/app/build/outputs/apk">Click Here</a></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Custom Dialog</td>
+      <td><a href="./CustomDialog/app/build/outputs/apk/debug/app-debug.apk">Click Here</a></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Custom Loader</td>
+      <td><a href="./CustomLoader/app">Click Here</a></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Custom Toast</td>
+      <td><a href="./CustomToast/app">Click Here</a></td>
     </tr>
   </tbody>
 </table>

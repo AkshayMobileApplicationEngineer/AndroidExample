@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="custom_dialog">Custom Dialog</string>
+    <string name="enter_something">Enter Something</string>
+    <string name="button">Button</string>
+</resources>
