@@ -32,10 +32,10 @@
             app:hintEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/username"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username or Email"
+                android:hint="Email"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
