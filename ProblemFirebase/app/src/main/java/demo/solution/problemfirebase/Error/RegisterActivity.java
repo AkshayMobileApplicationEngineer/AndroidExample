@@ -1,17 +1,16 @@
-package demo.solution.problemfirebase;
+package demo.solution.problemfirebase.Error;
+
+
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,10 +18,15 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+import demo.solution.problemfirebase.MainActivity;
+import demo.solution.problemfirebase.Model.User;
+import demo.solution.problemfirebase.R;
 import demo.solution.problemfirebase.utils.EmailUtils;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -33,13 +37,16 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText password;
     private MaterialButton register_button, login_button;
     private FirebaseAuth mAuth;
+
+    FirebaseDatabase database;
+    DatabaseReference databaseReference;
     private int timerinSecond = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_register);
+
 
         name = findViewById(R.id.Name);
         mobile = findViewById(R.id.mobile);
@@ -49,6 +56,8 @@ public class RegisterActivity extends AppCompatActivity {
         register_button = findViewById(R.id.register_button);
         login_button = findViewById(R.id.login_button);
         mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
 
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,16 +68,20 @@ public class RegisterActivity extends AppCompatActivity {
                 String Username = username.getText().toString();
                 String Password = password.getText().toString();
 
-
-                if (Email.isEmpty() || Password.isEmpty()) {
-                    Toast.makeText(RegisterActivity.this, "Please enter email and password", Toast.LENGTH_SHORT).show();
-                } else {
+                if (validateFields(Email, Password, Name, Mobile, Username)) {
+                    runTimeDataBase(database, Name, Mobile, Email, Username, Password);
                     register(Email, Password);
-
+                    Log.d("TAG", "Name: " + Name.toString());
+                    Log.d("TAG", "Mobile: " + Mobile.toString());
+                    Log.d("TAG", "Email: " + Email.toString());
+                    Log.d("TAG", "Username: " + Username.toString());
+                    Log.d("TAG", "Password: " + Password.toString());
                 }
 
-//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
             }
+
+
         });
 
         login_button.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
+
 
     private void register(String email, String password) {
         // Email and password validation
@@ -119,6 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
                             new Timer().schedule(new TimerTask() {
                                 @Override
                                 public void run() {
@@ -137,6 +152,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                     }
                 });
+
+
     }
 
     // Helper method to validate email format
@@ -144,28 +161,65 @@ public class RegisterActivity extends AppCompatActivity {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
+    private boolean validateFields(String email, String password, String name, String mobile, String username) {
+        if (email.isEmpty()) {
+            Toast.makeText(RegisterActivity.this, "Please enter email", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (password.isEmpty()) {
+            Toast.makeText(RegisterActivity.this, "Please enter password", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (name.isEmpty()) {
+            Toast.makeText(RegisterActivity.this, "Please enter name", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (mobile.isEmpty()) {
+            Toast.makeText(RegisterActivity.this, "Please enter mobile number", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (username.isEmpty()) {
+            Toast.makeText(RegisterActivity.this, "Please enter username", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+
+    /*
+     SignInCredential googleCredential = oneTapClient.getSignInCredentialFromIntent(data);
+    String idToken = googleCredential.getGoogleIdToken();
+        if (idToken !=  null) {
+        // Got an ID token from Google. Use it to authenticate
+        // with Firebase.
+        AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(firebaseCredential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+    * */
+
+
+
+    private void runTimeDataBase(FirebaseDatabase database, String name, String mobile, String email, String username, String password) {
+        databaseReference = database.getReference("users").child(username);
+        User user = new User(name, mobile, email, username,password);
+        databaseReference.setValue(user);
+    }
+
 }
 
-//    SignInCredential googleCredential = oneTapClient.getSignInCredentialFromIntent(data);
-//    String idToken = googleCredential.getGoogleIdToken();
-//        if (idToken !=  null) {
-//        // Got an ID token from Google. Use it to authenticate
-//        // with Firebase.
-//        AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
-//        mAuth.signInWithCredential(firebaseCredential)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            Log.d(TAG, "signInWithCredential:success");
-//                            FirebaseUser user = mAuth.getCurrentUser();
-//                            updateUI(user);
-//                        } else {
-//                            // If sign in fails, display a message to the user.
-//                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-//                            updateUI(null);
-//                        }
-//                    }
-//                });
-//    }
+
