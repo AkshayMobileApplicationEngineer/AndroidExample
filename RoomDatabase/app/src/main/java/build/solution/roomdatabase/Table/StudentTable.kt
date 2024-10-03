@@ -9,5 +9,5 @@ data class StudentTable (
     val name:String,
     val email:String,
     @PrimaryKey(autoGenerate = true)
-    val id:Int =0
+    val id:Int
 )
