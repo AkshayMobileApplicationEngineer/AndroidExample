@@ -1,24 +1,30 @@
-package build.solution.shayariapp
+package build.solution.shayariapp.UI.Activity
 
 import android.os.Bundle
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import build.solution.shayariapp.databinding.ActivityAddEditBinding
+import com.google.android.material.appbar.CollapsingToolbarLayout
+import build.solution.shayariapp.R
 
 class AddEditActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAddEditBinding
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var toolbarLayout: CollapsingToolbarLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_add_edit)  // Inflate your layout here
 
-        binding = ActivityAddEditBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // Initialize views using findViewById
+        toolbar = findViewById(R.id.toolbar)
+        toolbarLayout = findViewById(R.id.toolbar_layout)
 
-        setSupportActionBar(findViewById(R.id.toolbar))
-        binding.toolbarLayout.title = title
+
+        // Set up the toolbar
+        setSupportActionBar(toolbar)
+        toolbarLayout.title = "Your Custom Title"
+
+        // You can set up a click listener for the Floating Action Button
 
     }
 }

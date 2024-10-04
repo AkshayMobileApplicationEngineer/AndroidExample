@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">shayariApp</string>
+    <string name="title_activity_add_edit">AddEditActivity</string>
+    <string name="large_text">
+        Demo class the the doding gigiigi = dinun the odx the akd fgsg asdfb
+    </string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+</resources>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    android:background="@color/white"
+    tools:ignore="MissingConstraints">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvQuizName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="16dp"
+                android:text="Quiz Name"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ShareQuizeViaWhatsApp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:contentDescription="Share Quiz" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/upcominQuizImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitXY" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <!-- Row for Date and Time -->
+            <ImageView
+                android:id="@+id/dateLabelImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Date Label"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/quizDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/dateLabelImg"
+                android:layout_marginStart="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                tools:text="15 Aug" />
+
+            <ImageView
+                android:id="@+id/timeLabelImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/quizDate"
+                android:layout_marginStart="16dp"
+                android:contentDescription="Time Label" />
+
+            <TextView
+                android:id="@+id/quizTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/timeLabelImg"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                tools:text="8:30 PM" />
+
+            <!-- Row for Entry Fee and Prize -->
+            <TextView
+                android:id="@+id/entryFeeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Entry fee"
+                android:textStyle="bold"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/entry_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/entryFeeTv"
+                android:layout_marginStart="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                tools:text="1 only" />
+
+            <TextView
+                android:id="@+id/prizeTypeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Prize type"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/prizeType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/prizeTypeTv"
+                android:layout_marginStart="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                tools:text="Guaranteed" />
+        </RelativeLayout>
+
+        <!-- Progress Bar Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ProgressBar
+                android:id="@+id/seatProgress"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:indeterminate="false"
+                android:visibility="gone"
+                tools:max="100"
+                tools:progress="10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/seats_left"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="Seats Left: 250" />
+
+                <TextView
+                    android:id="@+id/total_seats"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="Total Seats: 500" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Button Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/enrollBtn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Enroll"
+                android:textColor="@android:color/white"
+
+                android:textAllCaps="false" />
+        </LinearLayout>android:bac
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

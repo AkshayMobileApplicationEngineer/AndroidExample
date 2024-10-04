@@ -5,6 +5,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import build.solution.retrofit.quize.NewAdapter
+import build.solution.retrofit.quize.News
+import build.solution.retrofit.quize.NewsService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -1,4 +1,7 @@
 package build.solution.kotlin.Constructor
 
-class Constructor {
-}
+
+
+    fun main(){
+        println("Hello")
+    }

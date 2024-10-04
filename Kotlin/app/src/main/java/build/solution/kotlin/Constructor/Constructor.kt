@@ -1,4 +1,5 @@
 package build.solution.kotlin.Constructor
 
-class Constructor {
-}
+class Constructor (
+    val
+)
